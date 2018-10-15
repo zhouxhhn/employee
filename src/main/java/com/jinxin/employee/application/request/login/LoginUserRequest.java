@@ -1,4 +1,4 @@
-package com.jinxin.employee.application.vo.login;
+package com.jinxin.employee.application.request.login;
 
 import lombok.Data;
 
@@ -6,7 +6,7 @@ import lombok.Data;
  * Created by zhouxh on 2018/10/14.
  */
 @Data
-public class LoginUserVo {
+public class LoginUserRequest {
 
     private String code;
 

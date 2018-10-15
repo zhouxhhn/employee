@@ -1,7 +1,7 @@
 package com.jinxin.employee.application.controller.login;
 
 import com.jinxin.employee.application.service.UserServiceContract;
-import com.jinxin.employee.application.vo.login.LoginUserVo;
+import com.jinxin.employee.application.request.login.LoginUserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,18 +22,18 @@ public class LoginController {
     /** web登录 */
     @RequestMapping("index")
     public ModelAndView index(){
-        return new ModelAndView("login/login", "loginUserVo", new LoginUserVo());
+        return new ModelAndView("login/login", "loginUserVo", new LoginUserRequest());
     }
 
 //    @PermissionAnnotation
     @RequestMapping(value = "/login")
-    public ModelAndView login(@Valid @ModelAttribute("loginUserVo")LoginUserVo loginUserVo, HttpSession session){
+    public ModelAndView login(@ModelAttribute("loginUserVo") @Valid LoginUserRequest loginUserRequest, HttpSession session){
 
-        boolean results = userService.banckendLogin(loginUserVo);
+        boolean results = userService.banckendLogin(loginUserRequest);
 
         //登录失败
         if(!results){
-            return new ModelAndView("login/login", "loginUserVo", loginUserVo).addObject("message","用户名或密码错误");
+            return new ModelAndView("login/login", "loginUserVo", loginUserRequest).addObject("message","用户名或密码错误");
         }
 
         //登录成功，返回到首页
@@ -42,13 +42,13 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/logout")
-    public ModelAndView logout(@Valid @ModelAttribute("loginUserVo")LoginUserVo loginUserVo, HttpSession session){
+    public ModelAndView logout(@ModelAttribute("loginUserVo") @Valid LoginUserRequest loginUserRequest, HttpSession session){
 
-        boolean results = userService.banckendLogin(loginUserVo);
+        boolean results = userService.banckendLogin(loginUserRequest);
 
         //登录失败
         if(!results){
-            return new ModelAndView("login/login", "loginUserVo", loginUserVo).addObject("message","用户名或密码错误");
+            return new ModelAndView("login/login", "loginUserVo", loginUserRequest).addObject("message","用户名或密码错误");
         }
 
         //登录成功，返回到首页

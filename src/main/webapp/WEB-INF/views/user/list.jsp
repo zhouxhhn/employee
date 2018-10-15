@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
@@ -18,6 +20,9 @@
                 </form>
             </div>
             <div class="chaxun mLR5" onclick="$('#form').submit()">查询</div>
+            <div class="batchEdit Btn1 yanQing" la="1" inDiv>新增</div>
+            <div class="batchEdit Btn1 yanQing" la="1" inDiv>修改</div>
+            <div class="batchEdit Btn1 yanQing" la="1" inDiv>删除</div>
         </div>
     </div>
     <div class="divW w100">
@@ -43,13 +48,13 @@
                 </tr>
             </thead>
             <tbody>
-            [#if userPage ??]
-                [#list userPage.records as user]
+                <c:forEach items="${page.records}" var="item">
                     <tr>
-                        <td>${user.name}</td>
+                        <td>${item.code}</td>
                     </tr>
-                [/#list]
-            [/#if]
+                </c:forEach>
+
+
             </tbody>
         </table>
     </div>
