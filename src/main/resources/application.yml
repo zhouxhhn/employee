@@ -32,4 +32,4 @@ mybatis-plus:
       cache-enabled: false
 #端口
 server:
-  port: 8080
+  port: 9090

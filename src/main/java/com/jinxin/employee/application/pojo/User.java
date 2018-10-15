@@ -27,6 +27,12 @@ public class User extends Model<User> {
     private String name;
 
     /**
+     * 密码
+     */
+    @TableField("password")
+    private String password;
+
+    /**
      *身份证号码
      */
     @TableField("identity_card")

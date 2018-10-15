@@ -5,6 +5,8 @@
     <resultMap id="BaseResultMap" type="com.jinxin.employee.application.pojo.User">
         <id column="id" property="id" />
         <result column="name" property="name" />
+        <result column="code" property="code" />
+        <result column="password" property="password" />
         <result column="identity_card" property="identityCard" />
         <result column="cellphone" property="cellphone" />
         <result column="sex" property="sex" />

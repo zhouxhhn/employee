@@ -1,7 +1,9 @@
 drop TABLE  if exists e_user;
 CREATE TABLE `e_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `code` varchar(250) DEFAULT NULL COMMENT '登录帐号',
   `name` varchar(250) DEFAULT NULL COMMENT '姓名',
+  `password` varchar(250) DEFAULT NULL COMMENT '密码',
   `identity_card` varchar(250) DEFAULT NULL COMMENT '身份证号码',
   `cellphone` varchar(250) DEFAULT NULL COMMENT '手机号码',
   `sex` TINYINT(4) DEFAULT NULL COMMENT '性别',
