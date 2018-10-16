@@ -13,10 +13,10 @@ spring:
     ignore-missing-migrations: true
     out-of-order: true
     validate-on-migrate: true
-  thymeleaf:
-    cache: false
-    prefix: /WEB-INF/views/
-    suffix: .jsp
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
 mybatis-plus:
   mapper-locations: classpath*:/mapper/xml/**Mapper.xml
   global-config:
@@ -32,4 +32,4 @@ mybatis-plus:
       cache-enabled: false
 #端口
 server:
-  port: 8080
+  port: 9090

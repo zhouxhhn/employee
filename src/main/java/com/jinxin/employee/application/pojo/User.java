@@ -20,6 +20,13 @@ public class User extends Model<User> {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
+
+    /**
+     * 帐号
+     */
+    @TableField("code")
+    private String code;
+
     /**
      * 名字
      */
@@ -27,10 +34,16 @@ public class User extends Model<User> {
     private String name;
 
     /**
+     * 密码
+     */
+    @TableField("password")
+    private String password;
+
+    /**
      *身份证号码
      */
     @TableField("identity_card")
-    private Long identityCard;
+    private String identityCard;
     /**
      * 手机号码
      */
