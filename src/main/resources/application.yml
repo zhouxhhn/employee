@@ -13,10 +13,10 @@ spring:
     ignore-missing-migrations: true
     out-of-order: true
     validate-on-migrate: true
-  thymeleaf:
-    cache: false
-    prefix: /WEB-INF/views/
-    suffix: .jsp
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
 mybatis-plus:
   mapper-locations: classpath*:/mapper/xml/**Mapper.xml
   global-config:

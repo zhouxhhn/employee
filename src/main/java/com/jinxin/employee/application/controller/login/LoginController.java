@@ -26,7 +26,7 @@ public class LoginController {
     }
 
 //    @PermissionAnnotation
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "/main")
     public ModelAndView login(@ModelAttribute("loginUserVo") @Valid LoginUserRequest loginUserRequest, HttpSession session){
 
         boolean results = userService.banckendLogin(loginUserRequest);
