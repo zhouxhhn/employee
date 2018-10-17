@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.jinxin.employee.application.mapper.UserMapper;
 import com.jinxin.employee.application.pojo.User;
 import com.jinxin.employee.application.request.user.AddUserRequest;
+import com.jinxin.employee.application.request.user.SearchUserRequest;
 import com.jinxin.employee.application.request.user.UpdateUserRequest;
 import com.jinxin.employee.application.service.UserServiceContract;
 import com.jinxin.employee.application.request.login.LoginUserRequest;
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,9 +51,16 @@ public class UserService extends ServiceImpl<UserMapper, User> implements UserSe
    * 查询所有从业人员列表
    */
   @Override
-  public Page index(int page, int size) {
+  public Page index(int page, int size,SearchUserRequest request) {
     Page userPage = new Page<User>(page, size);
-    userPage = selectPage(userPage);
+    try{
+      List<User> userList= baseMapper.getUserList(userPage.getLimit(), userPage.getOffset(),request);
+      List<User> totalUserList= baseMapper.getUserList(null, null,request);
+      userPage.setRecords(userList);
+      userPage.setTotal(totalUserList.size());
+    }catch (Exception e){
+      e.printStackTrace();
+    }
     return userPage;
   }
 
@@ -111,5 +120,21 @@ public class UserService extends ServiceImpl<UserMapper, User> implements UserSe
       return false;
     }
     return true;
+  }
+
+  @Override
+
+  public boolean delete(String userId) {
+    if(userId != null && !"".equals(userId)){
+      List<Long> ids = new ArrayList<>();
+      userId = userId.substring(0,userId.length()-1);
+      String[] userIds = userId.split(",");
+      for (int i = 0; i < userIds.length; i++) {
+        ids.add(Long.parseLong(userIds[0]));
+      }
+      deleteBatchIds(ids);
+      return true;
+    }
+    return false;
   }
 }

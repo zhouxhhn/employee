@@ -6,11 +6,13 @@ package com.jinxin.employee.application.controller.user;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.jinxin.employee.application.pojo.User;
 import com.jinxin.employee.application.request.user.AddUserRequest;
+import com.jinxin.employee.application.request.user.SearchUserRequest;
 import com.jinxin.employee.application.request.user.UpdateUserRequest;
 import com.jinxin.employee.application.service.UserServiceContract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,10 +30,10 @@ public class UserController {
    * 查询所有从业人员
    */
   @RequestMapping(value = "/list",method = RequestMethod.GET)
-  public ModelAndView list(){
+  public ModelAndView list(@ModelAttribute("request") @Valid SearchUserRequest request){
 
-    Page page = userService.index(1, 15);
-    return new ModelAndView("/user/list","page", page);
+    Page page = userService.index(1, 15,request);
+    return new ModelAndView("/user/list","page", page).addObject("searchRequest",request);
   }
 
   /**
@@ -66,10 +68,9 @@ public class UserController {
   /**
    * 删除指定的从业人员
    */
-  @RequestMapping(value = "/delete",method = RequestMethod.POST)
-  public ModelAndView delete(Long userId){
-
-    boolean results =  userService.deleteById(userId);
+  @RequestMapping(value = "/delete/{userId}",method = RequestMethod.GET)
+  public ModelAndView delete(@PathVariable String userId){
+    boolean results =  userService.delete(userId);
     return new ModelAndView("redirect:/user/list");
   }
 }

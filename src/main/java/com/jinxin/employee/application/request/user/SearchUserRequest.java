@@ -6,10 +6,7 @@ import lombok.Data;
  * Created by zhouxh on 2018/10/15.
  */
 @Data
-public class UpdateUserRequest {
-
-    //用户id
-    private Long id;
+public class SearchUserRequest {
 
     //登录帐号
     private String code;
@@ -17,15 +14,12 @@ public class UpdateUserRequest {
     //姓名
     private String name;
 
-    //密码
-    private String password;
-
     //身份证号码
     private String identityCard;
 
     //手机号码
     private String cellphone;
 
-    //性别,0为男，1为女
+    //性别
     private Long sex;
 }

@@ -15,4 +15,32 @@
         <result column="create_at" property="createAt" />
     </resultMap>
 
+    <select id="getUserList" resultMap="BaseResultMap">
+        select euser.* from e_user euser
+        <where>
+            <if test="request !=null and request.getName() != null and request.getName() != ''">
+                <bind name="nameLike" value="'%' + request.getName() + '%'"/>
+                AND euser.name LIKE #{nameLike}
+            </if>
+            <if test="request !=null and request.getCode() != null and request.getCode() != ''">
+                AND euser.code = #{request.code}
+            </if>
+            <if test="request !=null and request.getIdentityCard() != null and request.getIdentityCard() != ''">
+                <bind name="identityCardLike" value="'%' + request.getIdentityCard() + '%'"/>
+                AND euser.identity_card LIKE #{identityCardLike}
+            </if>
+            <if test="request !=null and request.getCellphone() != null and request.getCellphone() != ''">
+                <bind name="cellphoneLike" value="'%' + request.getCellphone() + '%'"/>
+                AND euser.cellphone LIKE #{cellphoneLike}
+            </if>
+            <if test="request !=null and request.getSex() != null">
+                AND euser.sex = #{request.sex}
+            </if>
+        </where>
+        ORDER BY `euser`.`create_at` DESC
+        <if test="limit != null and offset != null">
+            LIMIT #{limit} OFFSET #{offset}
+        </if>
+    </select>
+
 </mapper>

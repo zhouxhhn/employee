@@ -24,5 +24,5 @@ public class AddUserRequest {
     private String cellphone;
 
     //性别
-    private String sex;
+    private Long sex;
 }

@@ -1,5 +1,6 @@
 package com.jinxin.employee.application.controller.login;
 
+import com.jinxin.employee.application.annotation.PermissionAnnotation;
 import com.jinxin.employee.application.service.UserServiceContract;
 import com.jinxin.employee.application.request.login.LoginUserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class LoginController {
         return new ModelAndView("login/login", "loginUserVo", new LoginUserRequest());
     }
 
-//    @PermissionAnnotation
+    @PermissionAnnotation
     @RequestMapping(value = "/main")
     public ModelAndView main(@ModelAttribute("loginUserVo") @Valid LoginUserRequest loginUserRequest, HttpSession session){
 
