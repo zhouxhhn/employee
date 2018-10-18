@@ -8,6 +8,7 @@ package com.jinxin.employee.application.aspect;
 import com.jinxin.employee.application.constants.ResponseBackCode;
 import com.jinxin.employee.application.exception.PermissionDenyException;
 import com.jinxin.employee.application.pojo.User;
+import com.jinxin.employee.application.request.login.LoginUserRequest;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -17,6 +18,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,13 +39,14 @@ public class PermissionAspect {
 
   @Around("permission()")
   public Object judgetPermission(ProceedingJoinPoint point) throws Throwable {
-      HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-      HttpSession session = request.getSession();
-      User user = (User)session.getAttribute("user");
-      if(user==null) {//没有用户
-         //response.sendRedirect("login/login");
-      }
+    // 获取session中的用户信息
+    HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+    User user = (User) request.getSession().getAttribute("user");
 
-      return point.proceed(point.getArgs());
+    if (user == null) {
+      return new ModelAndView("forward:login", "loginUserVo", new LoginUserRequest());
+    }
+    return point.proceed();
+
   }
 }

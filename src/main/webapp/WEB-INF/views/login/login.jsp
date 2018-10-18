@@ -11,7 +11,7 @@
                <strong style="color:#2baab1;font-size:30px">后台管理</strong>
            </div>
            <div >
-               <form action="/main" id="form" method="post">
+               <form action="/login" id="form" method="post" >
                    <div style="margin-bottom:20px">
                        <input type="text" style="width:370px;height:30px" id="code" name="code" placeholder="用户名" value="${loginUserVo.code}"/>
                    </div>

@@ -4,6 +4,7 @@
 package com.jinxin.employee.application.controller.user;
 
 import com.baomidou.mybatisplus.plugins.Page;
+import com.jinxin.employee.application.annotation.PermissionAnnotation;
 import com.jinxin.employee.application.pojo.User;
 import com.jinxin.employee.application.request.user.AddUserRequest;
 import com.jinxin.employee.application.request.user.SearchUserRequest;
@@ -29,6 +30,7 @@ public class UserController {
   /**
    * 查询所有从业人员
    */
+  @PermissionAnnotation
   @RequestMapping(value = "/list",method = RequestMethod.GET)
   public ModelAndView list(@ModelAttribute("request") @Valid SearchUserRequest request){
 
@@ -39,6 +41,7 @@ public class UserController {
   /**
    * 新增从业人员
    */
+  @PermissionAnnotation
   @RequestMapping(value = "/add",method = RequestMethod.POST)
   public ModelAndView add(@ModelAttribute("addUserRequest") @Valid AddUserRequest addUserRequest){
 
@@ -49,6 +52,7 @@ public class UserController {
   /**
    * 更新从业人员
    */
+  @PermissionAnnotation
   @RequestMapping(value = "/update",method = RequestMethod.POST)
   public ModelAndView update(@ModelAttribute("updateUserRequest") @Valid UpdateUserRequest updateUserRequest){
 
@@ -59,6 +63,7 @@ public class UserController {
   /**
    * 查询指定的从业人员
    */
+  @PermissionAnnotation
   @RequestMapping(value = "/search",method = RequestMethod.GET)
   public ModelAndView search(Long userId){
     User user =  userService.selectById(userId);
@@ -68,6 +73,7 @@ public class UserController {
   /**
    * 删除指定的从业人员
    */
+  @PermissionAnnotation
   @RequestMapping(value = "/delete/{userId}",method = RequestMethod.GET)
   public ModelAndView delete(@PathVariable String userId){
     boolean results =  userService.delete(userId);

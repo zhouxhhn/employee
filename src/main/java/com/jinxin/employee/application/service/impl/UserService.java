@@ -30,21 +30,21 @@ import java.util.Map;
 public class UserService extends ServiceImpl<UserMapper, User> implements UserServiceContract {
 
   @Override
-  public boolean banckendLogin(LoginUserRequest loginUserRequest) {
+  public User banckendLogin(LoginUserRequest loginUserRequest) {
 
     //验证登录名是否存在
     Map<String,Object> map = new HashMap<>();
     map.put("code", loginUserRequest.getCode());
     List<User> userList = selectByMap(map);
     if(userList == null || userList.isEmpty()){
-      return false;
+      return null;
     }
     User user = userList.get(0);
     //验证用户的密码
     if (!BCrypt.checkpw(loginUserRequest.getPassword(), user.getPassword())) {
-      return false;
+      return null;
     }
-    return true;
+    return user;
   }
 
   /**

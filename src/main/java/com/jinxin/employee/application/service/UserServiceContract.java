@@ -18,7 +18,7 @@ import com.jinxin.employee.application.request.user.UpdateUserRequest;
 public interface UserServiceContract extends IService<User> {
 
    /**后台登录*/
-   boolean banckendLogin(LoginUserRequest loginUserRequest);
+   User banckendLogin(LoginUserRequest loginUserRequest);
 
    /**查询所有从业人员列表*/
    Page index(int page,int size,SearchUserRequest request);
